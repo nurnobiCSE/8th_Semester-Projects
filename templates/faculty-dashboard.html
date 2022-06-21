@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block containt %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1><i class="fa fa-dashboard"></i> Home</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'student' %}">
+        <div class="widget-small primary coloured-icon">
+          <i class="icon fa fa-users fa-3x"></i>
+          <div class="info">
+            <h4>Student</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'grades' %}">
+        <div class="widget-small info coloured-icon">
+          <i class="icon fa fa-graduation-cap fa-3x"></i>
+          <div class="info">
+            <h4>Grades</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'department' %}">
+        <div class="widget-small orange coloured-icon">
+          <i class="icon fa fa-book fa-3x"></i>
+          <div class="info">
+            <h4>Department</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'curriculum' %}">
+        <div class="widget-small danger coloured-icon">
+          <i class="icon fa fa-address-book-o fa-3x"></i>
+          <div class="info">
+            <h4>Curriculum</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'manageuser' %}">
+        <div class="widget-small violet coloured-icon">
+          <i class="icon fa fa-user-circle-o fa-3x"></i>
+          <div class="info">
+            <h4>Manage User</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'prerequisite' %}">
+        <div class="widget-small green coloured-icon">
+          <i class="icon fa fa-address-card-o fa-3x"></i>
+          <div class="info">
+            <h4>Pre-requisite</h4>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+{% endblock containt %}

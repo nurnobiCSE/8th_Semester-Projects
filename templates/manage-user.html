@@ -1,0 +1,109 @@
+{% extends 'base.html' %} {% block containt %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1>Manage User</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">Manage User</a></li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <form>
+        <div class="form-group">
+          <label for="formGroupExampleInput">User ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput"
+            placeholder="User ID"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">User Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput2"
+            placeholder="User Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputState">User Type</label>
+          <select id="inputState" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
+          Save
+        </button>
+        <button class="btn btn-danger my-4 my-sm-0 mr-sm-2" type="submit">
+          Delete
+        </button>
+        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
+          Clear
+        </button>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">User Data</h3>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>User ID</th>
+                  <th>User Name</th>
+                  <th>Password</th>
+                  <th>User Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Shon@moe</td>
+                  <td>shonmoe@123</td>
+                  <td>Admin</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>john@doe</td>
+                  <td>johndoe@123</td>
+                  <td>Faculty</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>john@doe</td>
+                  <td>johndoe@123</td>
+                  <td>Faculty</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>john@doe</td>
+                  <td>johndoe@123</td>
+                  <td>Faculty</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock containt %}
