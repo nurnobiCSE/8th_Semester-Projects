@@ -2,7 +2,9 @@ from django.shortcuts import render ,HttpResponse,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required
 def index(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -18,37 +20,47 @@ def index(request):
             return redirect('dashboard')
         else:
             print("username or password is incorrect !")    
+    
+          
     return render(request,"index.html")
 
+
+@login_required
 def dashboard(request):
 
     return render(request, 'faculty-dashboard.html')
 
+@login_required
 def student(request):
 
     return render(request, 'student.html')
 
+@login_required
 def grades(request):
 
     return render(request, 'grades.html')
 
+@login_required
 def department(request):
 
     return render(request, 'department.html')
 
-
+@login_required
 def curriculum(request):
 
     return render(request, 'curriculum.html')
 
+@login_required
 def manageuser(request):
 
     return render(request, 'manage-user.html')   
 
+@login_required
 def prerequisite(request):
 
     return render(request, 'pre-requisite.html')     
 
+@login_required
 def user_register(request):
     if request.method == 'POST':
         fname = request.POST['fname']
