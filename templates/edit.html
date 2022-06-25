@@ -2,57 +2,24 @@
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1>Add student information</h1>
+      <h1>Update student information</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
       <li class="breadcrumb-item"><a href="#">Student</a></li>
     </ul>
   </div>
-  {% if messages %} {% for message in messages %}
 
-  <div
-    class="alert text-{{ message.tags }} alert-dismissible fade show bg-dark h4 "
-    role="alert"
-  >
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-      &times;
-    </button>
-  </div>
-
-  {% endfor %} {% endif %}
-  <div class="row">
-    <div class="col-md-12">
-      <div class="search-box">
-        <nav class="navbar navbar-light bg-light">
-          <form class="form-inline">
-            <input
-              name="q"
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search with student ID"
-              aria-label="Search"
-            />
-            <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
-              Search
-            </button>
-            <button class="btn btn-primary my-4 my-sm-0" type="reload">
-              Refresh
-            </button>
-          </form>
-        </nav>
-      </div>
-    </div>
-  </div>
   <br />
   <div class="row">
-    <div class="col-md-3">
-      <form action="" method="POST">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+      <form action="/update_student/{{students.id }}">
         {% csrf_token %}
         <div class="form-group">
           <label for="formGroupExampleInput">Student ID</label>
           <input
+            value="{{ students.st_id }}"
             name="st_id"
             type="text"
             class="form-control"
@@ -64,6 +31,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">First Name</label>
           <input
+            value="{{ students.st_fname }}"
             name="st_fname"
             type="text"
             class="form-control"
@@ -75,6 +43,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Last Name</label>
           <input
+            value="{{ students.st_lname }}"
             name="st_lname"
             type="text"
             class="form-control"
@@ -86,6 +55,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Address</label>
           <input
+            value="{{ students.address }}"
             name="st_address"
             type="text"
             class="form-control"
@@ -102,7 +72,7 @@
             class="form-control"
             required
           >
-            <option selected></option>
+            <option selected>{{ students.gender }}</option>
             <option>Male</option>
             <option>Female</option>
           </select>
@@ -115,7 +85,7 @@
             class="form-control"
             required
           >
-            <option selected></option>
+            <option selected>{{ students.department }}</option>
             <option>CSE</option>
             <option>TXT</option>
             <option>ENG</option>
@@ -131,73 +101,20 @@
             class="form-control"
             required
           >
-            <option selected></option>
+            <option selected>{{ students.course }}</option>
             <option>Course1</option>
             <option>Course2</option>
             <option>Course3</option>
           </select>
         </div>
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
-          Save
+          Update
         </button>
 
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reset">
           Reset
         </button>
       </form>
-    </div>
-    <div class="col-md-9">
-      <div class="clearfix"></div>
-      <div class="col-md-12">
-        <div class="tile">
-          <h3 class="tile-title">Student Data</h3>
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Student ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Address</th>
-                  <th>Gender</th>
-                  <th>Department</th>
-                  <th>Course</th>
-                  <th>Edit</th>
-                  <th>Drop</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for data in student_data %}
-                <tr>
-                  <td>{{ data.st_id }}</td>
-                  <td>{{ data.st_fname }}</td>
-                  <td>{{ data.st_lname }}</td>
-                  <td>{{ data.address }}</td>
-                  <td>{{ data.gender }}</td>
-                  <td>{{ data.department }}</td>
-                  <td>{{ data.course }}</td>
-                  <td>
-                    <a
-                      class="btn btn-info cursor-pointer"
-                      href="/student_edit/{{ data.id }}"
-                      ><i class="fa fa-edit" style="font-size: 16px"></i
-                    ></a>
-                  </td>
-                  <td>
-                    <a
-                      class="btn btn-danger cursor-pointer"
-                      onclick="confirmDelete()"
-                      href="/delete_student/{{ data.id }}"
-                      ><i class="fa fa-trash"></i
-                    ></a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </main>

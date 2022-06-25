@@ -45,24 +45,27 @@ def student_add(request):
         gender = request.POST.get('st_gender')
         department = request.POST.get('st_department')
         course = request.POST.get('st_course')
-        st_form = Student(
-            st_id = st_id,
-            st_fname = st_fname,
-            st_lname = st_lname,
-            address = address,
-            gender = gender,
-            department = department,
-            course = course
-        )
+        if Student.objects.filter(st_id=st_id).exists():
+            messages.warning(request,"This ID already exist try another ID !")
+        else:    
+            st_form = Student(
+                st_id = st_id,
+                st_fname = st_fname,
+                st_lname = st_lname,
+                address = address,
+                gender = gender,
+                department = department,
+                course = course
+            )
 
-        st_form.save()
-        messages.success(request, " Successfully Added New Student")
-        return redirect('student')
+            st_form.save()
+            messages.success(request, " Successfully Added New Student")
+            return redirect('student')
     if 'q' in request.GET:
         q = request.GET['q']
         # student_data = Student.objects.filter(st_id__icontains=q)
         #for multiple query :
-        multiple_q = Q(Q(st_id__icontains=q) | Q(st_fname__icontains=q) | Q(st_lname__icontains=q) |Q(address__icontains=q) | Q(department__icontains=q)|Q(course__icontains=q))
+        multiple_q = Q(Q(st_id__icontains=q) | Q(st_fname__icontains=q) | Q(st_lname__icontains=q) |Q(address__icontains=q) | Q(department__icontains=q))
         student_data = Student.objects.filter(multiple_q)
     else:
         student_data = Student.objects.all()
@@ -72,6 +75,33 @@ def student_add(request):
     }
 
     return render(request, 'student.html',context)
+
+@login_required
+def student_edit(request,id):
+    students = Student.objects.get(pk=id)
+    context ={
+        'students': students
+    }
+    return render(request,'edit.html',context)
+
+@login_required
+def update_student(request,id):
+    students = Student.objects.get(pk=id)
+    students.st_id = request.GET['st_id']
+    students.st_fname = request.GET['st_fname']
+    students.st_fname = request.GET['st_lname']
+    students.address = request.GET['st_address']
+    students.gender = request.GET['st_gender']
+    students.department = request.GET['st_department']
+    students.course = request.GET['st_course']
+    students.save()
+    return redirect('student')
+
+@login_required
+def delete_student(request,id):
+    students = Student.objects.get(pk=id)
+    students.delete()
+    return redirect('student')
 
 @login_required
 def grades(request):
