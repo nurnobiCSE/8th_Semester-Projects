@@ -3,6 +3,10 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+
+# import all models
+from .models import *
 # Create your views here.
 @login_required
 def index(request):
@@ -31,9 +35,43 @@ def dashboard(request):
     return render(request, 'faculty-dashboard.html')
 
 @login_required
-def student(request):
+def student_add(request):
+    
+    if request.method == "POST":
+        st_id = request.POST.get('st_id')
+        st_fname = request.POST.get('st_fname')
+        st_lname = request.POST.get('st_lname')
+        address = request.POST.get('st_address')
+        gender = request.POST.get('st_gender')
+        department = request.POST.get('st_department')
+        course = request.POST.get('st_course')
+        st_form = Student(
+            st_id = st_id,
+            st_fname = st_fname,
+            st_lname = st_lname,
+            address = address,
+            gender = gender,
+            department = department,
+            course = course
+        )
 
-    return render(request, 'student.html')
+        st_form.save()
+        messages.success(request, " Successfully Added New Student")
+        return redirect('student')
+    if 'q' in request.GET:
+        q = request.GET['q']
+        # student_data = Student.objects.filter(st_id__icontains=q)
+        #for multiple query :
+        multiple_q = Q(Q(st_id__icontains=q) | Q(st_fname__icontains=q) | Q(st_lname__icontains=q) |Q(address__icontains=q) | Q(department__icontains=q)|Q(course__icontains=q))
+        student_data = Student.objects.filter(multiple_q)
+    else:
+        student_data = Student.objects.all()
+                
+    context = {
+        'student_data' : student_data,
+    }
+
+    return render(request, 'student.html',context)
 
 @login_required
 def grades(request):

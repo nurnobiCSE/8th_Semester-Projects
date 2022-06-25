@@ -9,12 +9,26 @@
       <li class="breadcrumb-item"><a href="#">Student</a></li>
     </ul>
   </div>
+  {% if messages %} {% for message in messages %}
+
+  <div
+    class="alert text-{{ message.tags }} alert-dismissible fade show bg-dark h4 "
+    role="alert"
+  >
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      &times;
+    </button>
+  </div>
+
+  {% endfor %} {% endif %}
   <div class="row">
     <div class="col-md-12">
       <div class="search-box">
         <nav class="navbar navbar-light bg-light">
           <form class="form-inline">
             <input
+              name="q"
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search with student ID"
@@ -34,10 +48,12 @@
   <br />
   <div class="row">
     <div class="col-md-4">
-      <form>
+      <form action="" method="POST">
+        {% csrf_token %}
         <div class="form-group">
           <label for="formGroupExampleInput">Student ID</label>
           <input
+            name="st_id"
             type="text"
             class="form-control"
             id="formGroupExampleInput"
@@ -47,6 +63,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">First Name</label>
           <input
+            name="st_fname"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -56,6 +73,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Last Name</label>
           <input
+            name="st_lname"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -65,43 +83,47 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Address</label>
           <input
+            name="st_address"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
-            placeholder="Last Name"
+            placeholder="Address"
           />
         </div>
         <div class="form-group">
           <label for="inputState">Gender</label>
-          <select id="inputState" class="form-control">
+          <select name="st_gender" id="inputState" class="form-control">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>Male</option>
+            <option>Female</option>
           </select>
         </div>
         <div class="form-group">
           <label for="inputState">Department</label>
-          <select id="inputState" class="form-control">
+          <select name="st_department" id="inputState" class="form-control">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>CSE</option>
+            <option>TXT</option>
+            <option>ENG</option>
+            <option>MAT</option>
+            <option>EEE</option>
           </select>
         </div>
         <div class="form-group">
           <label for="inputState">Course</label>
-          <select id="inputState" class="form-control">
+          <select name="st_course" id="inputState" class="form-control">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>Course1</option>
+            <option>Course2</option>
+            <option>Course3</option>
           </select>
         </div>
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
           Save
         </button>
-        <button class="btn btn-info my-4 my-sm-0 mr-sm-2" type="submit">
-          Update
-        </button>
-        <button class="btn btn-danger my-4 my-sm-0 mr-sm-2" type="submit">
-          Delete
-        </button>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
+        <a class="btn btn-info my-4 my-sm-0 mr-sm-2" href="#"> Update </a>
+        <a class="btn btn-danger my-4 my-sm-0 mr-sm-2" href="#"> Delete </a>
+        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reset">
           Reset
         </button>
       </form>
@@ -125,42 +147,17 @@
                 </tr>
               </thead>
               <tbody>
+                {% for data in student_data %}
                 <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>Male</td>
-                  <td>CSE</td>
-                  <td>CSE-213</td>
+                  <td>{{ data.st_id }}</td>
+                  <td>{{ data.st_fname }}</td>
+                  <td>{{ data.st_lname }}</td>
+                  <td>{{ data.address }}</td>
+                  <td>{{ data.gender }}</td>
+                  <td>{{ data.department }}</td>
+                  <td>{{ data.course }}</td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Male</td>
-                  <td>CSE</td>
-                  <td>CSE-213</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                  <td>Male</td>
-                  <td>CSE</td>
-                  <td>CSE-213</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                  <td>Male</td>
-                  <td>CSE</td>
-                  <td>CSE-213</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
