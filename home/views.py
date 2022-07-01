@@ -89,12 +89,15 @@ def update_student(request,id):
     students = Student.objects.get(pk=id)
     students.st_id = request.GET['st_id']
     students.st_fname = request.GET['st_fname']
-    students.st_fname = request.GET['st_lname']
+    students.st_lname = request.GET['st_lname']
     students.address = request.GET['st_address']
     students.gender = request.GET['st_gender']
     students.department = request.GET['st_department']
     students.course = request.GET['st_course']
+    
+
     students.save()
+    messages.success(request,"Student Update Successfully!")
     return redirect('student')
 
 @login_required
@@ -127,8 +130,7 @@ def manageuser(request):
 def prerequisite(request):
 
     return render(request, 'pre-requisite.html')     
-
-@login_required
+ 
 def user_register(request):
     if request.method == 'POST':
         fname = request.POST['fname']

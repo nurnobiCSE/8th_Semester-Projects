@@ -23,6 +23,24 @@
       <div class="logo">
         <h1>SES</h1>
       </div>
+      {% if messages %} {% for message in messages %}
+
+      <div
+        class="alert text-{{ message.tags }} alert-dismissible fade show bg-dark h4 "
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-hidden="true"
+        >
+          &times;
+        </button>
+      </div>
+
+      {% endfor %} {% endif %}
       <div class="login-box">
         <!-- start form -->
 
