@@ -1,0 +1,101 @@
+{% extends 'base.html' %} {% block containt %} {% load static %}
+<main class="app-content">
+  <div class="app-title">
+    <div>
+      <h1>View All Student Info</h1>
+    </div>
+    <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">All Student</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="search-box">
+        <nav class="navbar navbar-light bg-light">
+          <form class="form-inline">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search with Student ID"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Department"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Semester"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Intake"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Section"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-primary my-4 my-sm-0 mr-sm-2 mt-sm-2"
+              type="submit"
+            >
+              Search
+            </button>
+            <button class="btn btn-info my-4 my-sm-0 mt-sm-2" type="reload">
+              Refresh
+            </button>
+          </form>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+        <div class="tile">
+          <h3 class="tile-title">Student Data</h3>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Full Name</th>
+                  <th>Gender</th>
+                  <th>Department</th>
+                  <th>Semester</th>
+                  <th>Intake</th>
+                  <th>Section</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for data in students %}
+                <tr>
+                  <td>{{ data.st_id }}</td>
+                  <td>{{data.st_fullname}}</td>
+                  <td>{{ data.gender}}</td>
+                  <td>{{ data.department }}</td>
+                  <td>{{ data.semester }}</td>
+                  <td>{{ data.intake }}</td>
+                  <td>{{ data.section }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock containt %}

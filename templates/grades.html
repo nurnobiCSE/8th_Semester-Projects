@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block containt %}
+{% extends 'base.html' %} {% block containt %} {% load static %}
+
 <main class="app-content">
   <div class="app-title">
     <div>
@@ -17,13 +18,40 @@
             <input
               class="form-control mr-sm-2"
               type="search"
-              placeholder="Search grades with student ID"
+              placeholder="Search with Student ID"
               aria-label="Search"
             />
-            <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Department"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Semester"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Intake"
+              aria-label="Search"
+            />
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Section"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-primary my-4 my-sm-0 mr-sm-2 mt-sm-2"
+              type="submit"
+            >
               Search
             </button>
-            <button class="btn btn-primary my-4 my-sm-0" type="reload">
+            <button class="btn btn-info my-4 my-sm-0 mt-sm-2" type="reload">
               Refresh
             </button>
           </form>
@@ -33,24 +61,7 @@
   </div>
   <br />
   <div class="row">
-    <div class="col-md-4">
-      <form>
-        <div class="form-group">
-          <label for="inputState">Grading</label>
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
-          Save
-        </button>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
-          Clear
-        </button>
-      </form>
-    </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="tile">
@@ -60,9 +71,14 @@
               <thead>
                 <tr>
                   <th>Student ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
+                  <th>Full Name</th>
+                  <th>Gender</th>
+                  <th>Department</th>
+                  <th>Semester</th>
+                  <th>Intake</th>
+                  <th>Section</th>
                   <th>Grade</th>
+                  <th>Grading</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,25 +86,301 @@
                   <td>1</td>
                   <td>Mark</td>
                   <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>Male</td>
+                  <td>CSE</td>
+                  <td>CSE-213</td>
                   <td>A+</td>
+                  <td>
+                    <a href="#">
+                      <span
+                        class="badge badge-primary"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Edit Grade</span
+                      >
+                    </a>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Grading
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="inputState">Grade</label>
+                              <select id="inputState" class="form-control">
+                                <option selected>A+</option>
+                                <option selected>A</option>
+                                <option selected>A-</option>
+                                <option selected>B</option>
+                                <option selected>C</option>
+                                <option selected>D</option>
+                                <option selected>F</option>
+                                <option selected>I</option>
+                                <option>...</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Jacob</td>
                   <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Male</td>
+                  <td>CSE</td>
+                  <td>CSE-213</td>
                   <td>A+</td>
+                  <td>
+                    <a href="#">
+                      <span
+                        class="badge badge-primary"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Edit Grade</span
+                      >
+                    </a>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Grading
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="inputState">Grade</label>
+                              <select id="inputState" class="form-control">
+                                <option selected>A+</option>
+                                <option selected>A</option>
+                                <option selected>A-</option>
+                                <option selected>B</option>
+                                <option selected>C</option>
+                                <option selected>D</option>
+                                <option selected>F</option>
+                                <option selected>I</option>
+                                <option>...</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>Larry</td>
                   <td>the Bird</td>
+                  <td>@twitter</td>
+                  <td>Male</td>
+                  <td>CSE</td>
+                  <td>CSE-213</td>
                   <td>A+</td>
+                  <td>
+                    <a href="#">
+                      <span
+                        class="badge badge-primary"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Edit Grade</span
+                      >
+                    </a>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Grading
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="inputState">Grade</label>
+                              <select id="inputState" class="form-control">
+                                <option selected>A+</option>
+                                <option selected>A</option>
+                                <option selected>A-</option>
+                                <option selected>B</option>
+                                <option selected>C</option>
+                                <option selected>D</option>
+                                <option selected>F</option>
+                                <option selected>I</option>
+                                <option>...</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>4</td>
                   <td>Jacob</td>
                   <td>Thornton</td>
+                  <td>@fat</td>
+                  <td>Male</td>
+                  <td>CSE</td>
+                  <td>CSE-213</td>
                   <td>A+</td>
+                  <td>
+                    <a href="#">
+                      <span
+                        class="badge badge-primary"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Edit Grade</span
+                      >
+                    </a>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Grading
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="inputState">Grade</label>
+                              <select id="inputState" class="form-control">
+                                <option selected>A+</option>
+                                <option selected>A</option>
+                                <option selected>A-</option>
+                                <option selected>B</option>
+                                <option selected>C</option>
+                                <option selected>D</option>
+                                <option selected>F</option>
+                                <option selected>I</option>
+                                <option>...</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -98,4 +390,5 @@
     </div>
   </div>
 </main>
+
 {% endblock containt %}

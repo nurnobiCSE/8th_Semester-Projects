@@ -232,6 +232,11 @@
           >
         </li>
         <li>
+          <a class="app-menu__item" href="{% url 'student_list' %}"
+            ><span class="app-menu__label">View Student</span></a
+          >
+        </li>
+        <li>
           <a class="app-menu__item" href="{% url 'grades' %}"
             ><span class="app-menu__label">Grades</span></a
           >
@@ -248,7 +253,12 @@
         </li>
         <li>
           <a class="app-menu__item" href="{% url 'manageuser' %}"
-            ><span class="app-menu__label">Manage User</span></a
+            ><span class="app-menu__label">Add Faculty</span></a
+          >
+        </li>
+        <li>
+          <a class="app-menu__item" href="{% url 'addCourse_Faculty' %}"
+            ><span class="app-menu__label">Course Register to Faculty</span></a
           >
         </li>
         <li>
@@ -342,7 +352,7 @@
     </script>
     <script>
       function confirmDelete() {
-        confirm("Confirm delete this student ? ");
+        alert("The Student has been deleted ! ");
       }
     </script>
   </body>

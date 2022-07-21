@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block containt %}
+{% extends 'base.html' %} {% block containt %} {% load static %}
+
 <main class="app-content">
   <div class="app-title">
     <div>
@@ -9,25 +10,15 @@
       <li class="breadcrumb-item"><a href="#">Department</a></li>
     </ul>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="search-box">
-        <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
-              <input class="form-control mr-sm-2 " type="search" placeholder="Search grades with student ID" aria-label="Search">
-              <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">Search</button>
-              <button class="btn btn-primary my-4 my-sm-0" type="reload">Refresh</button>
-            </form>
-          </nav>
-      </div>
-    </div>
-  </div><br> -->
+
   <div class="row">
     <div class="col-md-4">
-      <form>
+      <form method="post">
+        {% csrf_token %}
         <div class="form-group">
           <label for="formGroupExampleInput">Department Code</label>
           <input
+            name="dep_code"
             type="text"
             class="form-control"
             id="formGroupExampleInput"
@@ -37,6 +28,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Department Name</label>
           <input
+            name="dep_name"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -46,10 +38,8 @@
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
           Save
         </button>
-        <button class="btn btn-danger my-4 my-sm-0 mr-sm-2" type="submit">
-          Delete
-        </button>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
+
+        <button class="btn btn-info my-4 my-sm-0 mr-sm-2" type="reset">
           Clear
         </button>
       </form>
@@ -65,25 +55,67 @@
                 <tr>
                   <th>Department Code</th>
                   <th>Department Name</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
+                {% for data in departments %}
                 <tr>
-                  <td>1</td>
-                  <td>CSE</td>
+                  <td>{{ data.dep_code }}</td>
+                  <td>{{ data.dep_name }}</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>CSE</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>CSE</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>CSE</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

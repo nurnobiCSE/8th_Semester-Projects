@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block containt %}
+{% extends 'base.html' %} {% block containt %} {% load static %}
+
 <main class="app-content">
   <div class="app-title">
     <div>
@@ -33,7 +34,7 @@
   </div>
   <br />
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <form>
         <div class="form-group">
           <label for="formGroupExampleInput">Course No</label>
@@ -51,6 +52,15 @@
             class="form-control"
             id="formGroupExampleInput2"
             placeholder="Course Title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Department</label>
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Department"
           />
         </div>
         <div class="form-group">
@@ -74,12 +84,15 @@
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
           Save
         </button>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
+        <button class="btn btn-danger my-4 my-sm-0 mr-sm-2" type="submit">
+          Delete
+        </button>
+        <button class="btn btn-info my-4 my-sm-0 mr-sm-2" type="reload">
           Reset
         </button>
       </form>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="tile">
@@ -94,7 +107,8 @@
                   <th>Department</th>
                   <th>Semester</th>
                   <th>Credit</th>
-                  <th>Pre-requisite Course</th>
+                  <th>Pre-req Course</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -106,6 +120,57 @@
                   <td>3rd</td>
                   <td>3</td>
                   <td>CSE-212</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>2</td>
@@ -115,6 +180,57 @@
                   <td>3rd</td>
                   <td>3</td>
                   <td>CSE-212</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -124,6 +240,57 @@
                   <td>3rd</td>
                   <td>3</td>
                   <td>CSE-212</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -133,6 +300,57 @@
                   <td>3rd</td>
                   <td>3</td>
                   <td>CSE-212</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>

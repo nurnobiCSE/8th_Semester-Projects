@@ -29,9 +29,9 @@
           />
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">First Name</label>
+          <label for="formGroupExampleInput2">Full Name</label>
           <input
-            value="{{ students.st_fname }}"
+            value="{{ students.st_fullname }}"
             name="st_fname"
             type="text"
             class="form-control"
@@ -40,30 +40,7 @@
             required
           />
         </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput2">Last Name</label>
-          <input
-            value="{{ students.st_lname }}"
-            name="st_lname"
-            type="text"
-            class="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Last Name"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput2">Address</label>
-          <input
-            value="{{ students.address }}"
-            name="st_address"
-            type="text"
-            class="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Address"
-            required
-          />
-        </div>
+
         <div class="form-group">
           <label for="inputState">Gender</label>
           <select
@@ -91,6 +68,48 @@
             <option>ENG</option>
             <option>MAT</option>
             <option>EEE</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputState">Semester</label>
+          <select
+            name="st_semester"
+            id="inputState"
+            class="form-control"
+            required
+          >
+            <option selected>{{ students.semester }}</option>
+            <option>1st</option>
+            <option>2nd</option>
+            <option>3rd</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputState">Intake</label>
+          <select
+            name="st_intake"
+            id="inputState"
+            class="form-control"
+            required
+          >
+            <option selected>{{ students.intake }}</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputState">Section</label>
+          <select
+            name="st_section"
+            id="inputState"
+            class="form-control"
+            required
+          >
+            <option selected>{{ students.section }}</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
           </select>
         </div>
         <div class="form-group">

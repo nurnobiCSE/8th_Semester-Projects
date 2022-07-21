@@ -1,75 +1,108 @@
-{% extends 'base.html' %} {% block containt %} {% load static %}
+{% extends 'base.html' %} {% block containt %}{% load static %}
 
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1>Add Faculty</h1>
+      <h1>Course Register to Faculty</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="#">Add Faculty</a></li>
+      <li class="breadcrumb-item">
+        <a href="#">Course Register to Faculty</a>
+      </li>
     </ul>
   </div>
-
+  <div class="row">
+    <div class="col-md-12">
+      <div class="search-box">
+        <nav class="navbar navbar-light bg-light">
+          <form class="form-inline">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search with course name"
+              aria-label="Search"
+            />
+            <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
+              Search
+            </button>
+            <button class="btn btn-primary my-4 my-sm-0" type="reload">
+              Refresh
+            </button>
+          </form>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <br />
   <div class="row">
     <div class="col-md-3">
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="formGroupExampleInput">Faculty No</label>
+          <label for="formGroupExampleInput">Course Name</label>
           <input
-            name="f_no"
+            name="course_name"
             type="text"
             class="form-control"
             id="formGroupExampleInput"
-            placeholder="Faculty No"
+            placeholder="Course Name"
           />
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput">Faculty Code</label>
+          <label for="inputState">Department</label>
+          <select id="inputState" class="form-control" name="department">
+            <option selected>Choose...</option>
+            {% for dep in department %}
+            <option>{{ dep.dep_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputState">Semester</label>
+          <select id="inputState" class="form-control" name="semester">
+            <option selected>Choose...</option>
+            <option>1st</option>
+            <option>2nd</option>
+            <option>3rd</option>
+            <option>4th</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Intake</label>
           <input
-            name="f_code"
+            name="intake"
             type="text"
             class="form-control"
             id="formGroupExampleInput"
-            placeholder="Faculty Code"
+            placeholder="Intake"
           />
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Faculty Fullname</label>
-          <input
-            name="f_fullname"
-            type="text"
-            class="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Fullname"
-          />
+          <label for="inputState">Section</label>
+          <select id="inputState" class="form-control" name="section">
+            <option selected>Choose...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Faculty Username</label>
-          <input
-            name="f_username"
-            type="text"
-            class="form-control"
-            id="formGroupExampleInput2"
-            placeholder="User Name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput2">Password</label>
-          <input
-            name="f_password"
-            type="password"
-            class="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Password"
-          />
+          <label for="inputState">Faculty Appoint</label>
+          <select id="inputState" class="form-control" name="faculty">
+            <option selected>Choose...</option>
+            {% for fac in fac %}
+            <option>{{ fac.f_code }}</option>
+            {% endfor %}
+          </select>
         </div>
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
           Save
         </button>
-        <button class="btn btn-info my-4 my-sm-0 mr-sm-2" type="reload">
-          Clear
+
+        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reset">
+          Reset
         </button>
       </form>
     </div>
@@ -77,27 +110,29 @@
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="tile">
-          <h3 class="tile-title">Faculty User Data</h3>
+          <h3 class="tile-title">Course Register Data</h3>
           <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Faculty No</th>
-                  <th>Faculty Code</th>
-                  <th>Faculty Fullname</th>
-                  <th>Username</th>
-                  <th>Password</th>
+                  <th>Course Name</th>
+                  <th>Department</th>
+                  <th>Semester</th>
+                  <th>Intake</th>
+                  <th>Section</th>
+                  <th>Faculty Appoint</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {% for data in faculty %}
+                {% for data in registerCours %}
                 <tr>
-                  <td>{{ data.f_no }}</td>
-                  <td>{{ data.f_code }}</td>
-                  <td>{{ data.f_fullname }}</td>
-                  <td>{{ data.f_username }}</td>
-                  <td>{{ data.f_password }}</td>
+                  <td>{{ data.course_name }}</td>
+                  <td>{{ data.department }}</td>
+                  <td>{{ data.semester }}</td>
+                  <td>{{ data.intake }}</td>
+                  <td>{{ data.section }}</td>
+                  <td>{{ data.faculty }}</td>
                   <td>
                     <div class="action_icon">
                       <a href="#" class="badge badge-primary">Edit</a>
@@ -159,5 +194,4 @@
     </div>
   </div>
 </main>
-
 {% endblock containt %}

@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block containt %}
+{% extends 'base.html' %} {% block containt %} {% load static %}
+
 <main class="app-content">
   <div class="app-title">
     <div>
@@ -6,18 +7,18 @@
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item">
-        <a href="{% url 'curriculum' %}">Curriculum</a>
-      </li>
+      <li class="breadcrumb-item"><a href="#">Curriculum</a></li>
     </ul>
   </div>
 
   <div class="row">
-    <div class="col-md-4">
-      <form>
+    <div class="col-md-3">
+      <form method="post">
+        {% csrf_token %}
         <div class="form-group">
           <label for="formGroupExampleInput">Course ID</label>
           <input
+            name="c_id"
             type="text"
             class="form-control"
             id="formGroupExampleInput"
@@ -27,6 +28,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Course Code</label>
           <input
+            name="c_code"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -36,6 +38,7 @@
         <div class="form-group">
           <label for="formGroupExampleInput2">Course Title</label>
           <input
+            name="c_title"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -44,21 +47,27 @@
         </div>
         <div class="form-group">
           <label for="inputState">Department</label>
-          <select id="inputState" class="form-control">
+          <select id="inputState" class="form-control" name="department">
             <option selected>Choose...</option>
-            <option>...</option>
+            {% for dep in departments %}
+            <option>{{dep.dep_name}}</option>
+            {% endfor %}
           </select>
         </div>
         <div class="form-group">
           <label for="inputState">Semester</label>
-          <select id="inputState" class="form-control">
+          <select id="inputState" class="form-control" name="semester">
             <option selected>Choose...</option>
-            <option>...</option>
+            <option>1</option>
+            <option>2</option>
+            <option>4</option>
+            <option>3</option>
           </select>
         </div>
         <div class="form-group">
           <label for="formGroupExampleInput2">Credit</label>
           <input
+            name="c_credit"
             type="text"
             class="form-control"
             id="formGroupExampleInput2"
@@ -68,15 +77,12 @@
         <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="submit">
           Save
         </button>
-        <button class="btn btn-danger my-4 my-sm-0 mr-sm-2" type="submit">
-          Delete
-        </button>
-        <button class="btn btn-primary my-4 my-sm-0 mr-sm-2" type="reload">
+        <button class="btn btn-info my-4 my-sm-0 mr-sm-2" type="reset">
           Clear
         </button>
       </form>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="clearfix"></div>
       <div class="col-md-12">
         <div class="tile">
@@ -92,45 +98,72 @@
                   <th>Semester</th>
                   <th>Credit</th>
                   <th>Pre Course</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
+                {% for data in curriculums %}
                 <tr>
-                  <td>1</td>
-                  <td>CSE-312</td>
-                  <td>Computer Science</td>
-                  <td>@CSE</td>
-                  <td>2nd</td>
-                  <td>3</td>
-                  <td>CSE-212</td>
+                  <td>{{ data.course_id }}</td>
+                  <td>{{ data.course_code }}</td>
+                  <td>{{ data.course_title }}</td>
+                  <td>{{ data.department }}</td>
+                  <td>{{ data.semester }}</td>
+                  <td>{{ data.credit }}</td>
+                  <td>--</td>
+                  <td>
+                    <div class="action_icon">
+                      <a href="#" class="badge badge-primary">Edit</a>
+                      <a
+                        href="#"
+                        class="badge badge-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        >Delete</a
+                      >
+                    </div>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Are you want to delete?
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">
+                              Yes
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger"
+                              data-dismiss="modal"
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>CSE-312</td>
-                  <td>Computer Science</td>
-                  <td>@CSE</td>
-                  <td>2nd</td>
-                  <td>3</td>
-                  <td>CSE-212</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>CSE-312</td>
-                  <td>Computer Science</td>
-                  <td>@CSE</td>
-                  <td>2nd</td>
-                  <td>3</td>
-                  <td>CSE-212</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>CSE-312</td>
-                  <td>Computer Science</td>
-                  <td>@CSE</td>
-                  <td>2nd</td>
-                  <td>3</td>
-                  <td>CSE-212</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

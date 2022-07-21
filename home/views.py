@@ -5,9 +5,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+
 # import all models
 from .models import *
 # Create your views here.
+def faculty_log(request):
+    return render(request,'faculty_login.html')
+
 @login_required
 def index(request):
     if request.method == "POST":
@@ -32,29 +36,31 @@ def index(request):
 @login_required
 def dashboard(request):
 
-    return render(request, 'faculty-dashboard.html')
+    return render(request, 'admin-dashboard.html')
 
 @login_required
 def student_add(request):
     
     if request.method == "POST":
         st_id = request.POST.get('st_id')
-        st_fname = request.POST.get('st_fname')
-        st_lname = request.POST.get('st_lname')
-        address = request.POST.get('st_address')
+        st_fullname = request.POST.get('st_fname')
         gender = request.POST.get('st_gender')
         department = request.POST.get('st_department')
+        semester = request.POST.get('st_semester')
+        intake = request.POST.get('st_intake')
+        section = request.POST.get('st_section')
         course = request.POST.get('st_course')
         if Student.objects.filter(st_id=st_id).exists():
             messages.warning(request,"This ID already exist try another ID !")
         else:    
             st_form = Student(
                 st_id = st_id,
-                st_fname = st_fname,
-                st_lname = st_lname,
-                address = address,
+                st_fullname = st_fullname,
                 gender = gender,
                 department = department,
+                semester = semester,
+                intake = intake,
+                section = section,
                 course = course
             )
 
@@ -77,6 +83,44 @@ def student_add(request):
     return render(request, 'student.html',context)
 
 @login_required
+def student_list(request):
+    students = Student.objects.all()
+    context={
+        'students':students
+    }
+    return render(request, 'view_student_list.html',context)
+
+@login_required
+def addCourse_Faculty(request):
+    if request.method =="POST":
+        name = request.POST.get('course_name')
+        dep = request.POST.get('department')
+        semester = request.POST.get('semester')
+        intake = request.POST.get('intake')
+        section = request.POST.get('section')
+        fac = request.POST.get('faculty')
+
+        cours_form = CourseOfFaculty(
+            course_name = name,
+            department = dep,
+            semester = semester,
+            intake = intake,
+            section = section,
+            faculty = fac
+        )
+        cours_form.save()
+    registeredCRS = CourseOfFaculty.objects.all()
+    department = Department.objects.all()
+    fac = Faculty.objects.all()
+    context={
+        'registerCours': registeredCRS,
+        'department': department,
+        'fac': fac
+    }    
+    return render(request, 'fac_reg_course.html', context)
+
+
+@login_required
 def student_edit(request,id):
     students = Student.objects.get(pk=id)
     context ={
@@ -88,11 +132,12 @@ def student_edit(request,id):
 def update_student(request,id):
     students = Student.objects.get(pk=id)
     students.st_id = request.GET['st_id']
-    students.st_fname = request.GET['st_fname']
-    students.st_lname = request.GET['st_lname']
-    students.address = request.GET['st_address']
+    students.st_fullname = request.GET['st_fname']
     students.gender = request.GET['st_gender']
     students.department = request.GET['st_department']
+    students.semester = request.GET['st_semester']
+    students.intake = request.GET['st_intake']
+    students.section = request.GET['st_section']
     students.course = request.GET['st_course']
     
 
@@ -113,18 +158,76 @@ def grades(request):
 
 @login_required
 def department(request):
+    if request.method=="POST":
+        code = request.POST.get('dep_code')
+        name = request.POST.get('dep_name')
 
-    return render(request, 'department.html')
+        dep_form = Department(
+            dep_code = code,
+            dep_name = name
+        )
+        dep_form.save()
+
+    dep_data = Department.objects.all()
+    context={
+        'departments': dep_data
+    }
+    return render(request, 'department.html',context)
 
 @login_required
 def curriculum(request):
+    if request.method == "POST":
+        c_id = request.POST.get('c_id')
+        code = request.POST.get('c_code')
+        title = request.POST.get('c_title')
+        department = request.POST.get('department')
+        semester = request.POST.get('semester')
+        credit = request.POST.get('c_credit')
+        
+        crc_form = Curriculum(
+            course_id = c_id,
+            course_code = code,
+            course_title = title,
+            department = department,
+            semester = semester,
+            credit = credit
+        )
+        crc_form.save()
+    
+    crc_data = Curriculum.objects.all()
+    dep_data = Department.objects.all()
+    context={
+        'curriculums':crc_data,
+        'departments':dep_data
+    }
 
-    return render(request, 'curriculum.html')
+
+    return render(request, 'curriculum.html', context)
 
 @login_required
 def manageuser(request):
+    if request.method == "POST":
+        no = request.POST.get('f_no')
+        code = request.POST.get('f_code')
+        name = request.POST.get('f_fullname')
+        username = request.POST.get('f_username')
+        password = request.POST.get('f_password')
 
-    return render(request, 'manage-user.html')   
+        fclt_form = Faculty(
+            f_no = no,
+            f_code = code,
+            f_fullname = name,
+            f_username = username,
+            f_password = password
+
+        )
+        fclt_form.save()
+    flt_data = Faculty.objects.all()
+    context={
+        'faculty':flt_data
+    }    
+         
+    return render(request, 'manage-user.html', context)   
 
 @login_required
 def prerequisite(request):
